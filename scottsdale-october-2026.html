@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scottsdale Trip — October House Shortlist</title>
+<style>
+  :root {
+    --bg: #faf7f2;
+    --card: #ffffff;
+    --ink: #2b2620;
+    --muted: #7a715f;
+    --accent: #c2703e;
+    --accent-dark: #a55a2d;
+    --green: #4c7a4c;
+    --line: #e8e1d4;
+    --love: #b83a5a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--ink);
+    padding: 40px 20px 60px;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 8px; }
+  .eyebrow {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 10px;
+  }
+  h1 { font-size: 34px; font-weight: 400; margin-bottom: 8px; }
+  .sub { color: var(--muted); font-size: 16px; font-style: italic; margin-bottom: 18px; }
+  .howto {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13.5px; color: #5c5344;
+    background: #f3ecdf; border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 18px; margin: 0 auto 26px; max-width: 620px;
+  }
+  .specs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 34px; }
+  .spec {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 12.5px; color: var(--ink);
+    background: #f0e9dc; border-radius: 999px; padding: 6px 14px;
+  }
+  .section-label {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); margin: 26px 4px 14px; display: none;
+  }
+  .section-label.visible { display: block; }
+  #likedLabel.visible { color: var(--love); }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 26px 28px 24px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 10px rgba(60, 45, 20, 0.05);
+    position: relative;
+    transition: border-color .25s, box-shadow .25s, opacity .25s;
+  }
+  .card.liked { border-color: var(--love); box-shadow: 0 3px 14px rgba(184, 58, 90, 0.13); }
+  .badge {
+    position: absolute; top: -11px; left: 24px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    background: var(--accent); color: #fff;
+    padding: 4px 12px; border-radius: 999px;
+  }
+  .badge.value { background: var(--green); }
+  .badge.neutral { background: #8d8371; }
+  .jane-pick {
+    position: absolute; top: -11px; right: 24px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    background: var(--love); color: #fff;
+    padding: 4px 12px; border-radius: 999px;
+    display: none;
+  }
+  .card.liked .jane-pick { display: block; }
+  .card h2 { font-size: 22px; font-weight: 600; margin-bottom: 2px; }
+  .card h2 a { color: var(--ink); text-decoration: none; border-bottom: 2px solid #e9c9ae; }
+  .card h2 a:hover { color: var(--accent-dark); border-bottom-color: var(--accent-dark); }
+  .host { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+  .price-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .price { font-size: 26px; font-weight: 700; color: var(--accent-dark); font-family: 'Helvetica Neue', Arial, sans-serif; }
+  .price-note { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12.5px; color: var(--muted); }
+  .desc { font-size: 15.5px; margin-bottom: 14px; }
+  .perks { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+  .perk {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 12.5px; color: #4a4132;
+    background: #f6f1e7; border: 1px solid var(--line);
+    border-radius: 999px; padding: 5px 12px;
+  }
+  .perk.star { background: #eaf2ea; border-color: #cfe0cf; color: #33532f; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .btn {
+    display: inline-block;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px; font-weight: 600;
+    background: var(--accent); color: #fff;
+    text-decoration: none;
+    padding: 10px 22px; border-radius: 8px;
+    border: none; cursor: pointer;
+  }
+  .btn:hover { background: var(--accent-dark); }
+  .btn.like {
+    background: #fff; color: var(--love);
+    border: 1.5px solid var(--love);
+  }
+  .btn.like:hover { background: #fdf0f3; }
+  .card.liked .btn.like { background: var(--love); color: #fff; }
+  .btn.remove {
+    background: transparent; color: var(--muted);
+    border: 1.5px solid #d8d0c0;
+  }
+  .btn.remove:hover { background: #f3eee4; color: #6c614c; }
+  #removedSection { margin-top: 40px; display: none; }
+  #removedSection.visible { display: block; }
+  #removedSection .card { opacity: 0.55; padding: 16px 24px; }
+  #removedSection .card h2 { font-size: 17px; }
+  #removedSection .card .host, #removedSection .card .price-row, #removedSection .card .desc,
+  #removedSection .card .perks, #removedSection .card .badge, #removedSection .card .jane-pick { display: none; }
+  .footnote {
+    margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line);
+    font-size: 13.5px; color: var(--muted); font-style: italic; text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div style="text-align:left;margin-bottom:14px;"><a href="index.html" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;color:#a55a2d;text-decoration:none;">&larr; Back to Vacation Ideas</a></div>
+    <div class="eyebrow">Scottsdale, Arizona &middot; October 2026</div>
+    <h1>Our October House Shortlist</h1>
+    <p class="sub">10 nights &middot; group of 12 &middot; priced for Oct 8&ndash;18 (other October dates are similar)</p>
+    <div class="howto">For Jane: tap <b style="color:var(--love)">♥ I like this one</b> to float a house to the top of the list, or <b>✕ Remove</b> to drop the ones that don&rsquo;t make the cut. Then tell Chris what survived!</div>
+    <div class="specs">
+      <span class="spec">Heated pool</span>
+      <span class="spec">Sleeps 12+</span>
+      <span class="spec">Big kitchen &amp; living room</span>
+      <span class="spec">A/C</span>
+      <span class="spec">~$10K target with fees</span>
+      <span class="spec">Booked direct &mdash; no Vrbo/Airbnb</span>
+    </div>
+  </header>
+
+  <div id="likedLabel" class="section-label">♥ Jane&rsquo;s Picks</div>
+  <div id="likedList"></div>
+  <div id="restLabel" class="section-label">Still Deciding</div>
+  <div id="cardList">
+
+    <div class="card" data-name="The Sunkiss">
+      <div class="badge">Top Pick</div><div class="jane-pick">♥ Jane&rsquo;s pick</div>
+      <h2><a href="https://hometeamvr.guestybookings.com/en/properties/66747fe41358a700137cf816?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">The Sunkiss</a></h2>
+      <div class="host">Home Team Luxury Rentals &middot; 5 BR (4 kings + bunk room) &middot; sleeps 16 &middot; ★ 4.9 (58 reviews)</div>
+      <div class="price-row"><span class="price">$8,720</span><span class="price-note">total with fees &amp; taxes &middot; ~$9,720 with pool heat (+$100/night)</span></div>
+      <p class="desc">The whole wish list in one backyard &mdash; and still under budget with the pool heated for the entire stay.</p>
+      <div class="perks">
+        <span class="perk star">Mini golf</span><span class="perk star">Pickleball + basketball court</span>
+        <span class="perk">Heated pool + hot tub</span><span class="perk">Pool table &amp; foosball</span>
+        <span class="perk">Cornhole &amp; ladder golf</span><span class="perk">Fire pit &amp; BBQ</span><span class="perk">Chef&rsquo;s kitchen</span>
+      </div>
+      <div class="actions">
+        <button class="btn like" onclick="toggleLike(this)">♥ I like this one</button>
+        <a class="btn" href="https://hometeamvr.guestybookings.com/en/properties/66747fe41358a700137cf816?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">View listing &rarr;</a>
+        <button class="btn remove" onclick="removeCard(this)">✕ Remove</button>
+      </div>
+    </div>
+
+    <div class="card" data-name="RnR">
+      <div class="badge value">Best Value</div><div class="jane-pick">♥ Jane&rsquo;s pick</div>
+      <h2><a href="https://www.staywithstylescottsdale.com/vacation-rental/rnr/" target="_blank">RnR</a></h2>
+      <div class="host">Stay With Style Scottsdale &middot; 7 BR (6 kings!) &middot; sleeps 16 &middot; 6,000 sq ft near Kierland Commons</div>
+      <div class="price-row"><span class="price">~$8,000&ndash;8,500</span><span class="price-note">estimated all-in from $650/night &middot; heated pool included FREE Oct&ndash;Apr</span></div>
+      <p class="desc">The most house for the money &mdash; six king bedrooms, and the pool heating costs nothing extra in October.</p>
+      <div class="perks">
+        <span class="perk star">Heated pool included</span><span class="perk">Waterfall pool + hot tub</span>
+        <span class="perk">Built-in BBQ + Blackstone</span><span class="perk">Fire table &amp; cornhole</span>
+        <span class="perk">Wet bar</span><span class="perk">Vaulted open living room</span>
+      </div>
+      <div class="actions">
+        <button class="btn like" onclick="toggleLike(this)">♥ I like this one</button>
+        <a class="btn" href="https://www.staywithstylescottsdale.com/vacation-rental/rnr/" target="_blank">View listing &rarr;</a>
+        <button class="btn remove" onclick="removeCard(this)">✕ Remove</button>
+      </div>
+    </div>
+
+    <div class="card" data-name="Private Pickleball Court, Movie Room & Hot Tub">
+      <div class="badge neutral">Under Budget</div><div class="jane-pick">♥ Jane&rsquo;s pick</div>
+      <h2><a href="https://hometeamvr.guestybookings.com/en/properties?city=Scottsdale&amp;country=United+States&amp;minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">Private Pickleball Court, Movie Room &amp; Hot Tub</a></h2>
+      <div class="host">Home Team Luxury Rentals &middot; 5 BR &middot; sleeps 12 &middot; ★ 4.9 (89 reviews)</div>
+      <div class="price-row"><span class="price">$8,865</span><span class="price-note">total with fees &middot; ~$9,865 with pool heat</span></div>
+      <p class="desc">Its own private pickleball court plus a movie room for the nights everyone&rsquo;s worn out from the sun.</p>
+      <div class="perks">
+        <span class="perk star">Private pickleball court</span><span class="perk star">Movie room</span>
+        <span class="perk">Pool + hot tub</span><span class="perk">Sleeps exactly 12</span>
+      </div>
+      <div class="actions">
+        <button class="btn like" onclick="toggleLike(this)">♥ I like this one</button>
+        <a class="btn" href="https://hometeamvr.guestybookings.com/en/properties?city=Scottsdale&amp;country=United+States&amp;minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">View listing &rarr;</a>
+        <button class="btn remove" onclick="removeCard(this)">✕ Remove</button>
+      </div>
+    </div>
+
+    <div class="card" data-name="Scottsdale Magic">
+      <div class="badge neutral">Splurge &mdash; ~$900 Over</div><div class="jane-pick">♥ Jane&rsquo;s pick</div>
+      <h2><a href="https://hometeamvr.guestybookings.com/en/properties/66b139f04de7110011a202af?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">Scottsdale Magic</a></h2>
+      <div class="host">Home Team Luxury Rentals &middot; 5 BR / 4 BA &middot; sleeps 16 &middot; ★ 4.8 (46 reviews)</div>
+      <div class="price-row"><span class="price">~$10,937</span><span class="price-note">$9,687 with fees + pool heat at $125/night</span></div>
+      <p class="desc">The most loaded backyard of the bunch, if we&rsquo;re willing to stretch a little past ten.</p>
+      <div class="perks">
+        <span class="perk star">Putt-putt green</span><span class="perk star">Arcade + game room</span>
+        <span class="perk">In-ground spa</span><span class="perk">Outdoor bar</span>
+        <span class="perk">Pool table &amp; ping pong</span><span class="perk">Giant Jenga</span>
+      </div>
+      <div class="actions">
+        <button class="btn like" onclick="toggleLike(this)">♥ I like this one</button>
+        <a class="btn" href="https://hometeamvr.guestybookings.com/en/properties/66b139f04de7110011a202af?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">View listing &rarr;</a>
+        <button class="btn remove" onclick="removeCard(this)">✕ Remove</button>
+      </div>
+    </div>
+
+    <div class="card" data-name="Backyard Arcade">
+      <div class="badge neutral">Splurge &mdash; ~$3K Over</div><div class="jane-pick">♥ Jane&rsquo;s pick</div>
+      <h2><a href="https://hometeamvr.guestybookings.com/en/properties/667340fa2513ad0013299121?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">Backyard Arcade</a></h2>
+      <div class="host">Home Team Luxury Rentals &middot; 6 BR / 3 BA &middot; sleeps 16 &middot; ★ 4.95 (58 reviews)</div>
+      <div class="price-row"><span class="price">~$13,039</span><span class="price-note">$11,789 with fees + pool heat at $125/night</span></div>
+      <p class="desc">Chris&rsquo;s find &mdash; the backyard that doesn&rsquo;t run out of ways to play, if the budget can stretch.</p>
+      <div class="perks">
+        <span class="perk star">Mini golf</span><span class="perk star">Heated pool + hot tub</span>
+        <span class="perk">Massive fire pit lounge</span><span class="perk">Cornhole &amp; foosball</span>
+        <span class="perk">Chef&rsquo;s kitchen, dining for 10</span><span class="perk">6 bedrooms</span>
+      </div>
+      <div class="actions">
+        <button class="btn like" onclick="toggleLike(this)">♥ I like this one</button>
+        <a class="btn" href="https://hometeamvr.guestybookings.com/en/properties/667340fa2513ad0013299121?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">View listing &rarr;</a>
+        <button class="btn remove" onclick="removeCard(this)">✕ Remove</button>
+      </div>
+    </div>
+
+    <div class="card" data-name="Epic Family Getaway">
+      <div class="badge neutral">Splurge &mdash; ~$1.8K Over</div><div class="jane-pick">♥ Jane&rsquo;s pick</div>
+      <h2><a href="https://hometeamvr.guestybookings.com/en/properties/676cd3f43dac9800123fbb83?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">Epic Family Getaway</a></h2>
+      <div class="host">Home Team Luxury Rentals &middot; 6 BR / 3 BA &middot; sleeps 23 &middot; ★ 4.85 (55 reviews)</div>
+      <div class="price-row"><span class="price">~$11,765</span><span class="price-note">$10,765 with fees + pool heat at $100/night</span></div>
+      <p class="desc">Chris&rsquo;s find &mdash; the biggest house of the bunch, built for a crowd with kids in tow.</p>
+      <div class="perks">
+        <span class="perk star">Putt-putt</span><span class="perk star">Basketball court</span>
+        <span class="perk">Fenced heated pool + hot tub</span><span class="perk">Kids&rsquo; bunk room: slide, arcade, foam pit, climbing wall</span>
+        <span class="perk">Shuffleboard, horseshoes, cornhole, ping pong</span><span class="perk">Pool table + PS5 + popcorn machine</span>
+      </div>
+      <div class="actions">
+        <button class="btn like" onclick="toggleLike(this)">♥ I like this one</button>
+        <a class="btn" href="https://hometeamvr.guestybookings.com/en/properties/676cd3f43dac9800123fbb83?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">View listing &rarr;</a>
+        <button class="btn remove" onclick="removeCard(this)">✕ Remove</button>
+      </div>
+    </div>
+
+    <div class="card" data-name="Luxe">
+      <div class="badge neutral">Price Pending</div><div class="jane-pick">♥ Jane&rsquo;s pick</div>
+      <h2><a href="https://www.staywithstylescottsdale.com/vacation-rental/luxe/?check_in=10/01/2026&amp;check_out=10/10/2026" target="_blank">Luxe</a></h2>
+      <div class="host">Stay With Style Scottsdale &middot; 7 BR / 4.5 BA &middot; sleeps 16 &middot; between Kierland &amp; Old Town</div>
+      <div class="price-row"><span class="price">Quote needed</span><span class="price-note">rate unlisted &middot; pool heat is $200/day here (~$1,800 for 9 nights)</span></div>
+      <p class="desc">Chris&rsquo;s find &mdash; the only house on the list with a real putting green, plus a brand-new sport court.</p>
+      <div class="perks">
+        <span class="perk star">3-hole putting green</span><span class="perk star">Pickleball + half basketball court</span>
+        <span class="perk">Heated pool (fee) + hot tub</span><span class="perk">Shuffleboard &amp; ping pong</span>
+        <span class="perk">Game room: pool table + foosball</span><span class="perk">Custom bar</span><span class="perk">Fire pit</span>
+      </div>
+      <div class="actions">
+        <button class="btn like" onclick="toggleLike(this)">♥ I like this one</button>
+        <a class="btn" href="https://www.staywithstylescottsdale.com/vacation-rental/luxe/?check_in=10/01/2026&amp;check_out=10/10/2026" target="_blank">View listing &rarr;</a>
+        <button class="btn remove" onclick="removeCard(this)">✕ Remove</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="removedSection">
+    <div class="section-label visible" style="color:#a08f75;">Removed &mdash; tap a name to bring it back</div>
+    <div id="removedList"></div>
+  </div>
+
+  <p class="footnote">Home Team prices are actual checkout totals (fees &amp; taxes included) for Oct 8&ndash;18, 12 guests. RnR&rsquo;s total is an estimate pending a direct quote. October desert nights dip into the 50s&ndash;60s, so pool heat is worth it. Note: likes &amp; removals reset if the page is reloaded &mdash; snap a photo or tell Chris your picks!</p>
+</div>
+
+<script>
+  function refreshLabels() {
+    var likedLabel = document.getElementById('likedLabel');
+    var restLabel = document.getElementById('restLabel');
+    var likedCount = document.getElementById('likedList').children.length;
+    var restCount = document.getElementById('cardList').children.length;
+    likedLabel.className = likedCount > 0 ? 'section-label visible' : 'section-label';
+    restLabel.className = (likedCount > 0 && restCount > 0) ? 'section-label visible' : 'section-label';
+    var removedSection = document.getElementById('removedSection');
+    removedSection.className = document.getElementById('removedList').children.length > 0 ? 'visible' : '';
+  }
+  function toggleLike(btn) {
+    var card = btn.closest('.card');
+    if (card.classList.contains('liked')) {
+      card.classList.remove('liked');
+      btn.innerHTML = '♥ I like this one';
+      document.getElementById('cardList').insertBefore(card, document.getElementById('cardList').firstChild);
+    } else {
+      card.classList.add('liked');
+      btn.innerHTML = '♥ Liked!';
+      document.getElementById('likedList').appendChild(card);
+    }
+    refreshLabels();
+  }
+  function removeCard(btn) {
+    var card = btn.closest('.card');
+    card.classList.remove('liked');
+    var likeBtn = card.querySelector('.btn.like');
+    if (likeBtn) likeBtn.innerHTML = '♥ I like this one';
+    var restoreBtn = document.createElement('button');
+    restoreBtn.className = 'btn';
+    restoreBtn.innerHTML = '&#8634; Bring back ' + card.getAttribute('data-name');
+    restoreBtn.onclick = function () {
+      card.querySelector('.actions').removeChild(restoreBtn);
+      card.querySelectorAll('.actions .btn').forEach(function (b) { b.style.display = ''; });
+      document.getElementById('cardList').appendChild(card);
+      refreshLabels();
+    };
+    card.querySelectorAll('.actions .btn').forEach(function (b) { b.style.display = 'none'; });
+    card.querySelector('.actions').appendChild(restoreBtn);
+    document.getElementById('removedList').appendChild(card);
+    refreshLabels();
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vacation Ideas</title>
+<style>
+  :root {
+    --bg: #faf7f2; --card: #fff; --ink: #2b2620; --muted: #7a715f;
+    --accent: #c2703e; --accent-dark: #a55a2d; --love: #b83a5a; --line: #e8e1d4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--bg); color: var(--ink);
+    padding: 60px 20px; line-height: 1.5; min-height: 100vh;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; text-align: center; }
+  .eyebrow {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 12px;
+  }
+  h1 { font-size: 44px; font-weight: 400; margin-bottom: 10px; }
+  .sub { color: var(--muted); font-size: 17px; font-style: italic; margin-bottom: 50px; }
+  .cats { display: flex; gap: 26px; justify-content: center; flex-wrap: wrap; }
+  .cat {
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+    padding: 40px 34px 34px; width: 380px; text-align: left;
+    box-shadow: 0 3px 14px rgba(60,45,20,0.06);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .cat:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(60,45,20,0.1); }
+  .cat .icon { font-size: 40px; margin-bottom: 14px; }
+  .cat h2 { font-size: 26px; font-weight: 600; margin-bottom: 8px; }
+  .cat p { font-size: 15px; color: var(--muted); margin-bottom: 22px; }
+  .trip {
+    display: block; background: #f6f1e7; border: 1px solid var(--line);
+    border-radius: 10px; padding: 14px 16px; margin-bottom: 10px;
+    text-decoration: none; color: var(--ink);
+    font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14.5px;
+  }
+  .trip:hover { background: #f0e7d5; }
+  .trip b { display: block; font-size: 15.5px; color: var(--accent-dark); margin-bottom: 2px; }
+  .trip.empty { background: transparent; border-style: dashed; color: var(--muted); font-style: italic; text-align: center; }
+  .footer { margin-top: 60px; font-size: 13px; color: var(--muted); font-style: italic; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">The Kirk Family Travel Board</div>
+  <h1>Vacation Ideas</h1>
+  <p class="sub">Pick a category — tap a trip to see the houses, vote on favorites, and dream a little.</p>
+
+  <div class="cats">
+    <div class="cat">
+      <div class="icon">🏜️</div>
+      <h2>Family Vacations</h2>
+      <p>Big-group trips — everyone's invited.</p>
+      <a class="trip" href="scottsdale-october-2026.html">
+        <b>Scottsdale, AZ — October 2026</b>
+        12 people · 10 nights · heated-pool houses · vote on your favorite!
+      </a>
+      <div class="trip empty">More ideas welcome — send them to Chris</div>
+    </div>
+
+    <div class="cat">
+      <div class="icon">💕</div>
+      <h2>Wife Getaway Trips</h2>
+      <p>Just the two of us.</p>
+      <div class="trip empty">Nothing booked yet… ideas brewing. Send Chris your wish list!</div>
+    </div>
+  </div>
+
+  <p class="footer">Updated July 27, 2026</p>
+</div>
+</body>
+</html>
