@@ -52,6 +52,41 @@
   <h1>Vacation Ideas</h1>
   <p class="sub">Pick a category — tap a trip to see the houses, vote on favorites, and dream a little.</p>
 
+  <div style="background:#fff;border:1.5px solid #c2703e;border-radius:16px;padding:24px 26px;margin:0 auto 44px;max-width:640px;text-align:left;box-shadow:0 3px 14px rgba(60,45,20,0.07);">
+    <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#c2703e;margin-bottom:10px;">✚ Found a place? Submit it here</div>
+    <p style="font-size:14px;color:#7a715f;margin-bottom:14px;">Paste the listing link below and hit submit — it goes straight to Chris, and the place shows up on this site (usually same day).</p>
+    <input id="subLink" type="text" placeholder="Paste the listing link (Vrbo, rental site, hotel…)" style="width:100%;padding:11px 13px;border:1px solid #e8e1d4;border-radius:8px;font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;margin-bottom:9px;">
+    <input id="subNote" type="text" placeholder="Optional: your name + why you love it" style="width:100%;padding:11px 13px;border:1px solid #e8e1d4;border-radius:8px;font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;margin-bottom:9px;">
+    <select id="subCat" style="width:100%;padding:11px 13px;border:1px solid #e8e1d4;border-radius:8px;font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;margin-bottom:13px;color:#2b2620;background:#fff;">
+      <option value="Family Vacation">For: Family Vacation (Scottsdale trip or new idea)</option>
+      <option value="Wife Getaway">For: Wife Getaway Trip</option>
+    </select>
+    <button onclick="submitPlace()" style="background:#c2703e;color:#fff;border:none;border-radius:8px;padding:12px 26px;font-family:'Helvetica Neue',Arial,sans-serif;font-size:15px;font-weight:600;cursor:pointer;">Submit place →</button>
+    <p id="subMsg" style="display:none;font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;color:#4c7a4c;margin-top:10px;">Your email app should have opened with everything filled in — just press Send!</p>
+  </div>
+  <script>
+    function submitPlace() {
+      var link = document.getElementById('subLink').value.trim();
+      var note = document.getElementById('subNote').value.trim();
+      var cat = document.getElementById('subCat').value;
+      if (!link) {
+        var m = document.getElementById('subMsg');
+        m.style.display = 'block'; m.style.color = '#9c4038';
+        m.textContent = 'Paste a listing link first!';
+        return;
+      }
+      var m2 = document.getElementById('subMsg');
+      m2.style.color = '#4c7a4c';
+      m2.textContent = 'Your email app should have opened with everything filled in — just press Send!';
+      var body = 'New vacation place submission!%0D%0A%0D%0ACategory: ' + encodeURIComponent(cat) +
+                 '%0D%0ALink: ' + encodeURIComponent(link) +
+                 (note ? '%0D%0ANote: ' + encodeURIComponent(note) : '') +
+                 '%0D%0A%0D%0A(Submitted from the Vacation Ideas site)';
+      window.location.href = 'mailto:chrisleekirk@gmail.com?subject=' + encodeURIComponent('Vacation Idea: new place submitted') + '&body=' + body;
+      document.getElementById('subMsg').style.display = 'block';
+    }
+  </script>
+
   <div class="cats">
     <div class="cat">
       <div class="icon">🏜️</div>
