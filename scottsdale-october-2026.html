@@ -46,12 +46,12 @@
   }
   .section-label.visible { display: block; }
   #likedLabel.visible { color: var(--love); }
-  #likedList, #cardList, #removedList {
+  #pendingList, #likedList, #cardList, #removedList {
     display: grid; grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
     gap: 26px; align-items: start; margin-bottom: 26px;
   }
   @media (max-width: 520px) {
-    #likedList, #cardList, #removedList { grid-template-columns: 1fr; }
+    #pendingList, #pendingList, #likedList, #cardList, #removedList { grid-template-columns: 1fr; }
   }
   .card {
     background: var(--card); border: 1px solid var(--cardline); border-radius: 16px;
@@ -143,15 +143,58 @@
     <h1>Our October House Shortlist</h1>
     <div class="rule"></div>
     <p class="sub">Trip dates: Oct 22–31, 2026 · group of 12 · each card shows the dates its price was quoted for</p>
-    <p class="sub" style="font-size:12.5px;margin-top:-14px;color:#6b7488;">Page last updated: Jul 26, 2026 · 9:20 PM</p>
+    <p class="sub" style="font-size:12.5px;margin-top:-14px;color:#6b7488;">Page last updated: Jul 26, 2026 · 11:05 PM</p>
     <div class="howto">For Jane: tap <b>♥ I like this one</b> to float a house to the top of the list, rate any house <b style="color:var(--gold-bright)">1–5 stars</b> (everyone's votes combine into the average shown), or <b style="color:var(--muted)">✕ Remove</b> to drop the ones that don't make the cut. Then tell Chris what survived!</div>
     
   </header>
+
+  <div id="pendingLabel" class="section-label" style="color:#c9a25e;">⏳ Just submitted — pending pricing</div>
+  <div id="pendingList"></div>
 
   <div id="likedLabel" class="section-label">♥ Jane's Picks</div>
   <div id="likedList"></div>
   <div id="restLabel" class="section-label">Still Deciding</div>
   <div id="cardList">
+
+    <div class="card" data-name="Desert Oasis on 2 Acres">
+      <div class="badge">New — Chris's Pick</div><div class="jane-pick">♥ Jane's pick</div>
+      <h2><a href="https://www.vrbo.com/4386484?chkin=2026-10-22&amp;chkout=2026-10-31&amp;startDate=2026-10-22&amp;endDate=2026-10-31&amp;adults=10&amp;children=1_17%2C1_17" target="_blank">Desert Oasis on 2 Acres</a></h2>
+      <div class="host">VacayAZ-area host via Vrbo · 6 BR / 4.5 BA (4 kings) · sleeps 14 · ★ 10/10 (9 reviews) · added by Chris · Jul 26</div>
+      <div><span class="dates">📅 Oct 22–31 · 9 nights</span></div>
+      <div class="price-row"><span class="price">$7,342</span><span class="price-note">all fees included · ~$8,250 with pool heat ($65–200/night, ask host)</span></div>
+      <p class="desc">"Nice place" — Chris. Two private acres by the Boulders with a rooftop view deck; hot-tub heat is included.</p>
+      <div class="perks">
+        <span class="perk star">Pickleball court</span><span class="perk star">Heated pool + hot tub (tub heat free)</span>
+        <span class="perk">Rooftop deck w/ mountain views</span><span class="perk">Basketball hoop &amp; cornhole</span>
+        <span class="perk">5,000+ sq ft on 2 acres</span><span class="perk">Steam room + jetted tub</span><span class="perk">30 min to Old Town</span>
+      </div>
+      <div class="rate" data-slug="desert-oasis"></div>
+      <div class="actions">
+        <button class="btn like" onclick="toggleLike(this)">♥ I like this one</button>
+        <a class="btn" href="https://www.vrbo.com/4386484?chkin=2026-10-22&amp;chkout=2026-10-31&amp;startDate=2026-10-22&amp;endDate=2026-10-31&amp;adults=10&amp;children=1_17%2C1_17" target="_blank">VIEW LISTING →</a>
+        <button class="btn remove" onclick="removeCard(this)">✕ Remove</button>
+      </div>
+    </div>
+
+    <div class="card" data-name="6BR Phoenix Retreat">
+      <div class="badge">Budget Champ — Rebecca's Find</div><div class="jane-pick">♥ Jane's pick</div>
+      <h2><a href="https://www.vrbo.com/1595479?chkin=2026-10-22&amp;chkout=2026-10-31&amp;startDate=2026-10-22&amp;endDate=2026-10-31&amp;adults=14" target="_blank">6BR Phoenix Retreat — Pool, Hot Tub &amp; Game Room</a></h2>
+      <div class="host">Arizona Elite Properties via Vrbo · 6 BR / 4 BA · sleeps 18 · ★ 9.8 (159 reviews) · added by Rebecca · Jul 26</div>
+      <div><span class="dates">📅 Oct 22–31 · 9 nights</span></div>
+      <div class="price-row"><span class="price">$5,272</span><span class="price-note">all fees included · ~$5,904 with pool heat ($70.20/day) — cheapest on the board</span></div>
+      <p class="desc">"has everything!!!!!!" — Rebecca. Diving pool with a slide, swim-up bar stools, and the biggest game room of the bunch.</p>
+      <div class="perks">
+        <span class="perk star">Putting green</span><span class="perk star">Diving pool w/ slide + swim-up bar</span>
+        <span class="perk">Sand volleyball pit</span><span class="perk">Game room: billiards, shuffleboard, ping pong, foosball</span>
+        <span class="perk">Hot tub heat included</span><span class="perk">Fire pit &amp; BBQ bar</span><span class="perk">Phoenix — ~15 min to Scottsdale</span>
+      </div>
+      <div class="rate" data-slug="phx-retreat"></div>
+      <div class="actions">
+        <button class="btn like" onclick="toggleLike(this)">♥ I like this one</button>
+        <a class="btn" href="https://www.vrbo.com/1595479?chkin=2026-10-22&amp;chkout=2026-10-31&amp;startDate=2026-10-22&amp;endDate=2026-10-31&amp;adults=14" target="_blank">VIEW LISTING →</a>
+        <button class="btn remove" onclick="removeCard(this)">✕ Remove</button>
+      </div>
+    </div>
 
     <div class="card" data-name="The Sunkiss">
       <div class="badge">Top Pick</div><div class="jane-pick">♥ Jane's pick</div>
@@ -427,6 +470,27 @@
     try { if (localStorage.getItem('kirkvote_v2_' + slug)) el.classList.add('voted'); } catch (e) {}
     updateAvg(el, slug);
   });
+
+  // ---- Pending submissions (shared via JSONBlob) ----
+  var PENDING_URL = 'https://jsonblob.com/api/jsonBlob/019fa222-f416-752a-899d-70d9ab1500f0';
+  function escp(t) { var d = document.createElement('div'); d.textContent = t || ''; return d.innerHTML; }
+  fetch(PENDING_URL).then(function (r) { return r.ok ? r.json() : { pending: [] }; })
+    .catch(function () { return { pending: [] }; })
+    .then(function (data) {
+      var arr = ((data && data.pending) || []).filter(function (p) { return p.c !== 'Wife Getaway'; });
+      if (!arr.length) return;
+      document.getElementById('pendingLabel').classList.add('visible');
+      var list = document.getElementById('pendingList');
+      arr.forEach(function (p) {
+        var card = document.createElement('div');
+        card.className = 'card';
+        card.style.borderStyle = 'dashed';
+        card.innerHTML = '<h2><a href="' + escp(p.l) + '" target="_blank">\u23F3 ' + escp(p.n) + "'s new find</a></h2>" +
+          '<div class="host">submitted ' + escp(p.d) + ' \u00b7 pricing &amp; details coming soon' + (p.note ? ' \u00b7 \u201c' + escp(p.note) + '\u201d' : '') + '</div>' +
+          '<div class="actions"><a class="btn" href="' + escp(p.l) + '" target="_blank">PEEK AT LISTING \u2192</a></div>';
+        list.appendChild(card);
+      });
+    });
 </script>
 </body>
 </html>

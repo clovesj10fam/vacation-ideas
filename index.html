@@ -82,12 +82,14 @@
         <b>Scottsdale, AZ — Oct 22–31, 2026</b>
         12 people · 9 nights · heated-pool houses · vote on your favorite!
       </a>
+      <div id="pendingFam"></div>
       <div class="trip empty">More ideas welcome — submit one below!</div>
     </div>
     <div class="cat">
       <div class="icon">🥂</div>
       <h2>Wife Getaway Trips</h2>
       <p>Just the two of us.</p>
+      <div id="pendingWife"></div>
       <div class="trip empty">Nothing booked yet… submit your wish list below!</div>
     </div>
   </div>
@@ -107,7 +109,7 @@
     <p id="subMsg"></p>
   </div>
 
-  <p class="footer">Last updated: Jul 26, 2026 · 9:20 PM Arizona-ish time</p>
+  <p class="footer">Last updated: Jul 26, 2026 · 11:05 PM</p>
 </div>
 <script>
   function submitPlace() {
@@ -143,17 +145,52 @@
     }).then(function (r) { return r.json(); }).then(function (data) {
       if (data.success === 'true' || data.success === true) {
         m.style.color = '#7fc48a';
-        m.textContent = '✓ Sent to Chris! It\'ll show up on the site soon.';
+        m.textContent = '✓ Sent! It\'s on the board now as \u201cpending review\u201d — full details get added soon.';
         document.getElementById('subLink').value = '';
         document.getElementById('subNote').value = '';
         document.getElementById('subName').value = '';
-        if (email) { m.textContent = '\u2713 Sent! A confirmation email is on its way to you.'; }
+        if (email) { m.textContent = '\u2713 Sent! It\'s on the board as \u201cpending review\u201d and a confirmation email is on its way.'; }
+        addPending({ n: name || 'Someone', c: cat, l: link, note: note, d: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) });
       } else { throw new Error('send failed'); }
     }).catch(function () {
       m.style.color = '#d98a80';
       m.textContent = 'Hmm, that didn\'t go through — just text or email the link to Chris instead!';
     });
   }
+
+  // ---- Instant "pending review" board (shared via JSONBlob) ----
+  var PENDING_URL = 'https://jsonblob.com/api/jsonBlob/019fa222-f416-752a-899d-70d9ab1500f0';
+  function esc(t) { var d = document.createElement('div'); d.textContent = t || ''; return d.innerHTML; }
+  function addPending(item) {
+    fetch(PENDING_URL).then(function (r) { return r.ok ? r.json() : { pending: [] }; })
+      .catch(function () { return { pending: [] }; })
+      .then(function (data) {
+        var arr = (data && data.pending) || [];
+        arr.push(item);
+        return fetch(PENDING_URL, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ pending: arr }) });
+      }).then(loadPending).catch(function () {});
+  }
+  function loadPending() {
+    fetch(PENDING_URL).then(function (r) { return r.ok ? r.json() : { pending: [] }; })
+      .catch(function () { return { pending: [] }; })
+      .then(function (data) {
+        var arr = (data && data.pending) || [];
+        var fam = document.getElementById('pendingFam');
+        var wife = document.getElementById('pendingWife');
+        if (fam) fam.innerHTML = '';
+        if (wife) wife.innerHTML = '';
+        arr.forEach(function (p) {
+          var target = (p.c === 'Wife Getaway') ? wife : fam;
+          if (!target) return;
+          var a = document.createElement('a');
+          a.className = 'trip'; a.href = p.l; a.target = '_blank';
+          a.style.borderStyle = 'dashed';
+          a.innerHTML = '<b>\u23F3 ' + esc(p.n) + "'s find \u00b7 " + esc(p.d) + '</b>pending review \u00b7 tap to peek at the listing';
+          target.appendChild(a);
+        });
+      });
+  }
+  loadPending();
 </script>
 </body>
 </html>
