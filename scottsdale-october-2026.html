@@ -70,7 +70,13 @@
   .card h2 { font-size: 23px; font-weight: 500; margin-bottom: 3px; }
   .card h2 a { color: var(--cream); text-decoration: none; border-bottom: 1px solid var(--goldline); }
   .card h2 a:hover { color: var(--gold-bright); border-bottom-color: var(--gold-bright); }
-  .host { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12.5px; color: var(--faint); margin-bottom: 13px; }
+  .host { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12.5px; color: var(--faint); margin-bottom: 10px; }
+  .dates {
+    display: inline-block; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12px;
+    font-weight: 700; letter-spacing: .5px; color: var(--gold-bright);
+    background: rgba(201,162,94,.12); border: 1px solid var(--goldline);
+    border-radius: 999px; padding: 5px 13px; margin-bottom: 13px;
+  }
   .price-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
   .price { font-size: 25px; font-weight: 700; color: var(--gold-bright); font-family: 'Helvetica Neue', Arial, sans-serif; }
   .price-note { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12px; color: var(--muted); }
@@ -115,7 +121,7 @@
     <div class="eyebrow">Scottsdale, Arizona · October 2026</div>
     <h1>Our October House Shortlist</h1>
     <div class="rule"></div>
-    <p class="sub">10 nights · group of 12 · priced for Oct 8–18 (other October dates are similar)</p>
+    <p class="sub">group of 12 · quoted dates shown on each house — most are Oct 8–18</p>
     <div class="howto">For Jane: tap <b>♥ I like this one</b> to float a house to the top of the list, or <b style="color:var(--muted)">✕ Remove</b> to drop the ones that don't make the cut. Then tell Chris what survived!</div>
     <div class="specs">
       <span class="spec">Heated pool</span>
@@ -123,7 +129,7 @@
       <span class="spec">Big kitchen &amp; living room</span>
       <span class="spec">A/C</span>
       <span class="spec">~$10K target with fees</span>
-      <span class="spec">Booked direct — no Vrbo/Airbnb</span>
+      <span class="spec">Every link goes to the real listing</span>
     </div>
   </header>
 
@@ -136,6 +142,7 @@
       <div class="badge">Top Pick</div><div class="jane-pick">♥ Jane's pick</div>
       <h2><a href="https://hometeamvr.guestybookings.com/en/properties/66747fe41358a700137cf816?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">The Sunkiss</a></h2>
       <div class="host">Home Team Luxury Rentals · 5 BR (4 kings + bunk room) · sleeps 16 · ★ 4.9 (58 reviews)</div>
+      <div><span class="dates">📅 Oct 8–18 · 10 nights</span></div>
       <div class="price-row"><span class="price">$8,720</span><span class="price-note">total with fees &amp; taxes · ~$9,720 with pool heat (+$100/night)</span></div>
       <p class="desc">The whole wish list in one backyard — and still under budget with the pool heated for the entire stay.</p>
       <div class="perks">
@@ -154,6 +161,7 @@
       <div class="badge">Best Value</div><div class="jane-pick">♥ Jane's pick</div>
       <h2><a href="https://www.staywithstylescottsdale.com/vacation-rental/rnr/" target="_blank">RnR</a></h2>
       <div class="host">Stay With Style Scottsdale · 7 BR (6 kings!) · sleeps 16 · 6,000 sq ft near Kierland Commons</div>
+      <div><span class="dates">📅 Oct 8–18 · 10 nights</span></div>
       <div class="price-row"><span class="price">~$8,000–8,500</span><span class="price-note">estimated all-in from $650/night · heated pool included FREE Oct–Apr</span></div>
       <p class="desc">The most house for the money — six king bedrooms, and the pool heating costs nothing extra in October.</p>
       <div class="perks">
@@ -172,6 +180,7 @@
       <div class="badge neutral">Under Budget</div><div class="jane-pick">♥ Jane's pick</div>
       <h2><a href="https://hometeamvr.guestybookings.com/en/properties?city=Scottsdale&amp;country=United+States&amp;minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">Private Pickleball Court, Movie Room &amp; Hot Tub</a></h2>
       <div class="host">Home Team Luxury Rentals · 5 BR · sleeps 12 · ★ 4.9 (89 reviews)</div>
+      <div><span class="dates">📅 Oct 8–18 · 10 nights</span></div>
       <div class="price-row"><span class="price">$8,865</span><span class="price-note">total with fees · ~$9,865 with pool heat</span></div>
       <p class="desc">Its own private pickleball court plus a movie room for the nights everyone's worn out from the sun.</p>
       <div class="perks">
@@ -189,6 +198,7 @@
       <div class="badge neutral">Splurge — ~$900 Over</div><div class="jane-pick">♥ Jane's pick</div>
       <h2><a href="https://hometeamvr.guestybookings.com/en/properties/66b139f04de7110011a202af?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">Scottsdale Magic</a></h2>
       <div class="host">Home Team Luxury Rentals · 5 BR / 4 BA · sleeps 16 · ★ 4.8 (46 reviews)</div>
+      <div><span class="dates">📅 Oct 8–18 · 10 nights</span></div>
       <div class="price-row"><span class="price">~$10,937</span><span class="price-note">$9,687 with fees + pool heat at $125/night</span></div>
       <p class="desc">The most loaded backyard of the bunch, if we're willing to stretch a little past ten.</p>
       <div class="perks">
@@ -207,6 +217,7 @@
       <div class="badge neutral">Splurge — ~$3K Over</div><div class="jane-pick">♥ Jane's pick</div>
       <h2><a href="https://hometeamvr.guestybookings.com/en/properties/667340fa2513ad0013299121?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">Backyard Arcade</a></h2>
       <div class="host">Home Team Luxury Rentals · 6 BR / 3 BA · sleeps 16 · ★ 4.95 (58 reviews)</div>
+      <div><span class="dates">📅 Oct 8–18 · 10 nights</span></div>
       <div class="price-row"><span class="price">~$13,039</span><span class="price-note">$11,789 with fees + pool heat at $125/night</span></div>
       <p class="desc">Chris's find — the backyard that doesn't run out of ways to play, if the budget can stretch.</p>
       <div class="perks">
@@ -225,6 +236,7 @@
       <div class="badge neutral">Splurge — ~$1.8K Over</div><div class="jane-pick">♥ Jane's pick</div>
       <h2><a href="https://hometeamvr.guestybookings.com/en/properties/676cd3f43dac9800123fbb83?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">Epic Family Getaway</a></h2>
       <div class="host">Home Team Luxury Rentals · 6 BR / 3 BA · sleeps 23 · ★ 4.85 (55 reviews)</div>
+      <div><span class="dates">📅 Oct 8–18 · 10 nights</span></div>
       <div class="price-row"><span class="price">~$11,765</span><span class="price-note">$10,765 with fees + pool heat at $100/night</span></div>
       <p class="desc">Chris's find — the biggest house of the bunch, built for a crowd with kids in tow.</p>
       <div class="perks">
@@ -243,6 +255,7 @@
       <div class="badge neutral">New — Oct 22–31 Dates</div><div class="jane-pick">♥ Jane's pick</div>
       <h2><a href="https://www.vrbo.com/2668972?chkin=2026-10-22&amp;chkout=2026-10-31&amp;startDate=2026-10-22&amp;endDate=2026-10-31&amp;adults=10" target="_blank">Stylish Arizona Abode</a></h2>
       <div class="host">VacayAZ via Vrbo · 5 BR / 3.5 BA · sleeps 12 · North Scottsdale, mountain views · ★ 10/10 (33 reviews)</div>
+      <div><span class="dates">📅 Oct 22–31 · 9 nights</span></div>
       <div class="price-row"><span class="price">$8,163</span><span class="price-note">9 nights (Oct 22–31), all fees included · ~$9,738 with pool heat ($175/night)</span></div>
       <p class="desc">Chris's find — a $2M+ desert home with a waterfall grotto pool and rooftop deck, still under $10K heated.</p>
       <div class="perks">
@@ -261,6 +274,7 @@
       <div class="badge neutral">Price Pending</div><div class="jane-pick">♥ Jane's pick</div>
       <h2><a href="https://www.staywithstylescottsdale.com/vacation-rental/luxe/?check_in=10/01/2026&amp;check_out=10/10/2026" target="_blank">Luxe</a></h2>
       <div class="host">Stay With Style Scottsdale · 7 BR / 4.5 BA · sleeps 16 · between Kierland &amp; Old Town</div>
+      <div><span class="dates">📅 Oct 1–10 · 9 nights</span></div>
       <div class="price-row"><span class="price">Quote needed</span><span class="price-note">rate unlisted · pool heat is $200/day here (~$1,800 for 9 nights)</span></div>
       <p class="desc">Chris's find — the only house on the list with a real putting green, plus a brand-new sport court.</p>
       <div class="perks">
