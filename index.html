@@ -5,109 +5,125 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vacation Ideas</title>
 <style>
-  :root {
-    --bg: #faf7f2; --card: #fff; --ink: #2b2620; --muted: #7a715f;
-    --accent: #c2703e; --accent-dark: #a55a2d; --love: #b83a5a; --line: #e8e1d4;
-  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: Georgia, 'Times New Roman', serif;
-    background: var(--bg); color: var(--ink);
-    padding: 60px 20px; line-height: 1.5; min-height: 100vh;
+    background: radial-gradient(ellipse 120% 80% at 50% -10%, #1e2a44 0%, #141c30 45%, #0d1220 100%);
+    background-attachment: fixed;
+    color: #e9e2d4; min-height: 100vh; padding: 70px 20px; line-height: 1.55;
   }
-  .wrap { max-width: 860px; margin: 0 auto; text-align: center; }
+  .wrap { max-width: 880px; margin: 0 auto; text-align: center; }
   .eyebrow {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 12px;
+    font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 11.5px;
+    letter-spacing: 4px; text-transform: uppercase; color: #c9a25e; margin-bottom: 16px;
   }
-  h1 { font-size: 44px; font-weight: 400; margin-bottom: 10px; }
-  .sub { color: var(--muted); font-size: 17px; font-style: italic; margin-bottom: 50px; }
+  h1 { font-size: 50px; font-weight: 400; color: #f4ead6; letter-spacing: 1px; margin-bottom: 10px; }
+  h1 em { color: #c9a25e; font-style: italic; }
+  .rule { width: 70px; height: 1px; background: linear-gradient(90deg, transparent, #c9a25e, transparent); margin: 18px auto 14px; }
+  .sub { font-size: 16.5px; font-style: italic; color: #9aa3b8; margin-bottom: 44px; }
+  .stars { color: #c9a25e; letter-spacing: 8px; margin-bottom: 8px; font-size: 13px; }
+  .submit {
+    background: rgba(255,255,255,.045); border: 1px solid rgba(201,162,94,.35);
+    border-radius: 18px; padding: 30px 32px; margin: 0 auto 52px; max-width: 640px; text-align: left;
+    box-shadow: 0 20px 50px rgba(0,0,0,.35);
+  }
+  .submit h3 { font-size: 19px; color: #c9a25e; letter-spacing: .5px; margin-bottom: 6px; }
+  .submit p { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13.5px; color: #9aa3b8; margin-bottom: 16px; }
+  .submit input, .submit select {
+    width: 100%; padding: 12px 14px; border: 1px solid rgba(201,162,94,.3); border-radius: 10px;
+    font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14px; margin-bottom: 10px;
+    background: rgba(13,18,32,.6); color: #e9e2d4;
+  }
+  .submit input::placeholder { color: #6b7488; }
+  .submit select option { background: #141c30; color: #e9e2d4; }
+  .btn {
+    background: linear-gradient(120deg, #d4af6a, #b8934e); color: #141c30; border: none;
+    border-radius: 10px; padding: 13px 30px; font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14.5px; font-weight: 700; letter-spacing: .5px; cursor: pointer;
+  }
+  .btn:hover { background: linear-gradient(120deg, #e0bd7c, #c9a25e); }
+  #subMsg { display: none; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13px; color: #7fc48a; margin-top: 10px; }
   .cats { display: flex; gap: 26px; justify-content: center; flex-wrap: wrap; }
   .cat {
-    background: var(--card); border: 1px solid var(--line); border-radius: 18px;
-    padding: 40px 34px 34px; width: 380px; text-align: left;
-    box-shadow: 0 3px 14px rgba(60,45,20,0.06);
-    transition: transform .15s, box-shadow .15s;
+    background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.09);
+    border-radius: 20px; padding: 40px 34px; width: 390px; text-align: left;
+    box-shadow: 0 20px 50px rgba(0,0,0,.3);
   }
-  .cat:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(60,45,20,0.1); }
-  .cat .icon { font-size: 40px; margin-bottom: 14px; }
-  .cat h2 { font-size: 26px; font-weight: 600; margin-bottom: 8px; }
-  .cat p { font-size: 15px; color: var(--muted); margin-bottom: 22px; }
+  .cat .icon { font-size: 38px; margin-bottom: 14px; }
+  .cat h2 { font-size: 26px; color: #f4ead6; margin-bottom: 6px; }
+  .cat p { font-size: 14.5px; color: #9aa3b8; font-style: italic; margin-bottom: 22px; }
   .trip {
-    display: block; background: #f6f1e7; border: 1px solid var(--line);
-    border-radius: 10px; padding: 14px 16px; margin-bottom: 10px;
-    text-decoration: none; color: var(--ink);
-    font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14.5px;
+    display: block; background: rgba(201,162,94,.1); border: 1px solid rgba(201,162,94,.3);
+    border-radius: 12px; padding: 16px 18px; text-decoration: none; color: #e9e2d4;
+    font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13.5px; margin-bottom: 10px;
   }
-  .trip:hover { background: #f0e7d5; }
-  .trip b { display: block; font-size: 15.5px; color: var(--accent-dark); margin-bottom: 2px; }
-  .trip.empty { background: transparent; border-style: dashed; color: var(--muted); font-style: italic; text-align: center; }
-  .footer { margin-top: 60px; font-size: 13px; color: var(--muted); font-style: italic; }
+  .trip:hover { background: rgba(201,162,94,.18); }
+  .trip b { display: block; font-size: 15.5px; color: #d4af6a; margin-bottom: 3px; }
+  .trip.empty { background: transparent; border-style: dashed; border-color: rgba(255,255,255,.18); color: #6b7488; font-style: italic; text-align: center; }
+  .footer { margin-top: 60px; font-size: 12.5px; color: #6b7488; font-style: italic; }
 </style>
 </head>
 <body>
 <div class="wrap">
+  <div class="stars">✦ ✧ ✦</div>
   <div class="eyebrow">The Kirk Family Travel Board</div>
-  <h1>Vacation Ideas</h1>
-  <p class="sub">Pick a category — tap a trip to see the houses, vote on favorites, and dream a little.</p>
+  <h1>Vacation <em>Ideas</em></h1>
+  <div class="rule"></div>
+  <p class="sub">Five-star dreaming, planned together.</p>
 
-  <div style="background:#fff;border:1.5px solid #c2703e;border-radius:16px;padding:24px 26px;margin:0 auto 44px;max-width:640px;text-align:left;box-shadow:0 3px 14px rgba(60,45,20,0.07);">
-    <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#c2703e;margin-bottom:10px;">✚ Found a place? Submit it here</div>
-    <p style="font-size:14px;color:#7a715f;margin-bottom:14px;">Paste the listing link below and hit submit — it goes straight to Chris, and the place shows up on this site (usually same day).</p>
-    <input id="subLink" type="text" placeholder="Paste the listing link (Vrbo, rental site, hotel…)" style="width:100%;padding:11px 13px;border:1px solid #e8e1d4;border-radius:8px;font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;margin-bottom:9px;">
-    <input id="subNote" type="text" placeholder="Optional: your name + why you love it" style="width:100%;padding:11px 13px;border:1px solid #e8e1d4;border-radius:8px;font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;margin-bottom:9px;">
-    <select id="subCat" style="width:100%;padding:11px 13px;border:1px solid #e8e1d4;border-radius:8px;font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;margin-bottom:13px;color:#2b2620;background:#fff;">
+  <div class="submit">
+    <h3>✚ Found a place? Submit it here</h3>
+    <p>Paste the listing link below and hit submit — it goes straight to Chris, and the place shows up on this site (usually same day).</p>
+    <input id="subLink" type="text" placeholder="Paste the listing link (Vrbo, rental site, hotel…)">
+    <input id="subNote" type="text" placeholder="Optional: your name + why you love it">
+    <select id="subCat">
       <option value="Family Vacation">For: Family Vacation (Scottsdale trip or new idea)</option>
       <option value="Wife Getaway">For: Wife Getaway Trip</option>
     </select>
-    <button onclick="submitPlace()" style="background:#c2703e;color:#fff;border:none;border-radius:8px;padding:12px 26px;font-family:'Helvetica Neue',Arial,sans-serif;font-size:15px;font-weight:600;cursor:pointer;">Submit place →</button>
-    <p id="subMsg" style="display:none;font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;color:#4c7a4c;margin-top:10px;">Your email app should have opened with everything filled in — just press Send!</p>
+    <button class="btn" onclick="submitPlace()">SUBMIT PLACE →</button>
+    <p id="subMsg"></p>
   </div>
-  <script>
-    function submitPlace() {
-      var link = document.getElementById('subLink').value.trim();
-      var note = document.getElementById('subNote').value.trim();
-      var cat = document.getElementById('subCat').value;
-      if (!link) {
-        var m = document.getElementById('subMsg');
-        m.style.display = 'block'; m.style.color = '#9c4038';
-        m.textContent = 'Paste a listing link first!';
-        return;
-      }
-      var m2 = document.getElementById('subMsg');
-      m2.style.color = '#4c7a4c';
-      m2.textContent = 'Your email app should have opened with everything filled in — just press Send!';
-      var body = 'New vacation place submission!%0D%0A%0D%0ACategory: ' + encodeURIComponent(cat) +
-                 '%0D%0ALink: ' + encodeURIComponent(link) +
-                 (note ? '%0D%0ANote: ' + encodeURIComponent(note) : '') +
-                 '%0D%0A%0D%0A(Submitted from the Vacation Ideas site)';
-      window.location.href = 'mailto:chrisleekirk@gmail.com?subject=' + encodeURIComponent('Vacation Idea: new place submitted') + '&body=' + body;
-      document.getElementById('subMsg').style.display = 'block';
-    }
-  </script>
 
   <div class="cats">
     <div class="cat">
-      <div class="icon">🏜️</div>
+      <div class="icon">🏔️</div>
       <h2>Family Vacations</h2>
       <p>Big-group trips — everyone's invited.</p>
       <a class="trip" href="scottsdale-october-2026.html">
         <b>Scottsdale, AZ — October 2026</b>
         12 people · 10 nights · heated-pool houses · vote on your favorite!
       </a>
-      <div class="trip empty">More ideas welcome — send them to Chris</div>
+      <div class="trip empty">More ideas welcome — use the submit box above</div>
     </div>
-
     <div class="cat">
-      <div class="icon">💕</div>
+      <div class="icon">🥂</div>
       <h2>Wife Getaway Trips</h2>
       <p>Just the two of us.</p>
-      <div class="trip empty">Nothing booked yet… ideas brewing. Send Chris your wish list!</div>
+      <div class="trip empty">Nothing booked yet… submit your wish list above!</div>
     </div>
   </div>
 
   <p class="footer">Updated July 27, 2026</p>
 </div>
+<script>
+  function submitPlace() {
+    var link = document.getElementById('subLink').value.trim();
+    var note = document.getElementById('subNote').value.trim();
+    var cat = document.getElementById('subCat').value;
+    var m = document.getElementById('subMsg');
+    if (!link) {
+      m.style.display = 'block'; m.style.color = '#d98a80';
+      m.textContent = 'Paste a listing link first!';
+      return;
+    }
+    var body = 'New vacation place submission!%0D%0A%0D%0ACategory: ' + encodeURIComponent(cat) +
+               '%0D%0ALink: ' + encodeURIComponent(link) +
+               (note ? '%0D%0ANote: ' + encodeURIComponent(note) : '') +
+               '%0D%0A%0D%0A(Submitted from the Vacation Ideas site)';
+    window.location.href = 'mailto:chrisleekirk@gmail.com?subject=' + encodeURIComponent('Vacation Idea: new place submitted') + '&body=' + body;
+    m.style.display = 'block'; m.style.color = '#7fc48a';
+    m.textContent = 'Your email app should have opened with everything filled in — just press Send!';
+  }
+</script>
 </body>
 </html>
