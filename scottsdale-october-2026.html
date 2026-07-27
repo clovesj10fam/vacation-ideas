@@ -410,7 +410,7 @@
   }
 
   // ---- Star voting (shared counters via abacus.jasoncameron.dev) ----
-  var RATE_NS = 'kirk-vacation-ideas-2026-v2';
+  var RATE_NS = 'kirk-vacation-ideas-2026-v3';
   var RATE_API = 'https://abacus.jasoncameron.dev';
   function getCounts(slug) {
     return Promise.all([1,2,3,4,5].map(function (n) {
@@ -435,7 +435,7 @@
     });
   }
   function castVote(el, slug, n) {
-    var votedKey = 'kirkvote_v2_' + slug;
+    var votedKey = 'kirkvote_v3_' + slug;
     try { if (localStorage.getItem(votedKey)) {
       el.querySelector('.avg').textContent = 'You already rated this one!';
       setTimeout(function () { updateAvg(el, slug); }, 1600);
@@ -467,7 +467,7 @@
     var avg = document.createElement('span');
     avg.className = 'avg'; avg.textContent = 'Loading ratings\u2026';
     el.appendChild(avg);
-    try { if (localStorage.getItem('kirkvote_v2_' + slug)) el.classList.add('voted'); } catch (e) {}
+    try { if (localStorage.getItem('kirkvote_v3_' + slug)) el.classList.add('voted'); } catch (e) {}
     updateAvg(el, slug);
   });
 
