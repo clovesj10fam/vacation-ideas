@@ -116,13 +116,29 @@
       m.textContent = 'Paste a listing link first!';
       return;
     }
-    var body = 'New vacation place submission!%0D%0A%0D%0ACategory: ' + encodeURIComponent(cat) +
-               '%0D%0ALink: ' + encodeURIComponent(link) +
-               (note ? '%0D%0ANote: ' + encodeURIComponent(note) : '') +
-               '%0D%0A%0D%0A(Submitted from the Vacation Ideas site)';
-    window.location.href = 'mailto:chrisleekirk@gmail.com?subject=' + encodeURIComponent('Vacation Idea: new place submitted') + '&body=' + body;
-    m.style.display = 'block'; m.style.color = '#7fc48a';
-    m.textContent = 'Your email app should have opened with everything filled in — just press Send!';
+    m.style.display = 'block'; m.style.color = '#9aa3b8';
+    m.textContent = 'Sending…';
+    fetch('https://formsubmit.co/ajax/chrisleekirk@gmail.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: 'Vacation Idea: new place submitted',
+        Category: cat,
+        Link: link,
+        Note: note || '(none)',
+        _template: 'table'
+      })
+    }).then(function (r) { return r.json(); }).then(function (data) {
+      if (data.success === 'true' || data.success === true) {
+        m.style.color = '#7fc48a';
+        m.textContent = '✓ Sent to Chris! It\'ll show up on the site soon.';
+        document.getElementById('subLink').value = '';
+        document.getElementById('subNote').value = '';
+      } else { throw new Error('send failed'); }
+    }).catch(function () {
+      m.style.color = '#d98a80';
+      m.innerHTML = 'Hmm, that didn\'t go through. Backup: <a style="color:#d4af6a" href="mailto:chrisleekirk@gmail.com?subject=Vacation%20Idea&body=' + encodeURIComponent('Link: ' + link + (note ? '\nNote: ' + note : '')) + '">email it to Chris instead</a> or just text him the link!';
+    });
   }
 </script>
 </body>
