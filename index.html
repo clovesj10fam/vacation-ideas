@@ -75,7 +75,9 @@
     <h3>✚ Found a place? Submit it here</h3>
     <p>Paste the listing link below and hit submit — it goes straight to Chris, and the place shows up on this site (usually same day).</p>
     <input id="subLink" type="text" placeholder="Paste the listing link (Vrbo, rental site, hotel…)">
-    <input id="subNote" type="text" placeholder="Optional: your name + why you love it">
+    <input id="subName" type="text" placeholder="Your name (so you get credit on the board!)">
+    <input id="subEmail" type="email" placeholder="Your email — we'll send a confirmation (optional)">
+    <input id="subNote" type="text" placeholder="Why you love it (optional)">
     <select id="subCat">
       <option value="Family Vacation">For: Family Vacation (Scottsdale trip or new idea)</option>
       <option value="Wife Getaway">For: Wife Getaway Trip</option>
@@ -116,24 +118,34 @@
       m.textContent = 'Paste a listing link first!';
       return;
     }
+    var name = document.getElementById('subName').value.trim();
+    var email = document.getElementById('subEmail').value.trim();
     m.style.display = 'block'; m.style.color = '#9aa3b8';
     m.textContent = 'Sending…';
+    var payload = {
+      _subject: 'Vacation Idea: new place submitted',
+      'Submitted by': name || '(anonymous)',
+      Category: cat,
+      Link: link,
+      Note: note || '(none)',
+      _template: 'table'
+    };
+    if (email) {
+      payload.email = email;
+      payload._autoresponse = 'Got it! Your vacation place was submitted to the Kirk Family Vacation Ideas board. Chris will review it and it will appear on the site soon — usually the same day. Thanks for the idea!';
+    }
     fetch('https://formsubmit.co/ajax/7ad3ac8894db1be4cfc761738b77e60d', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        _subject: 'Vacation Idea: new place submitted',
-        Category: cat,
-        Link: link,
-        Note: note || '(none)',
-        _template: 'table'
-      })
+      body: JSON.stringify(payload)
     }).then(function (r) { return r.json(); }).then(function (data) {
       if (data.success === 'true' || data.success === true) {
         m.style.color = '#7fc48a';
         m.textContent = '✓ Sent to Chris! It\'ll show up on the site soon.';
         document.getElementById('subLink').value = '';
         document.getElementById('subNote').value = '';
+        document.getElementById('subName').value = '';
+        if (email) { m.textContent = '\u2713 Sent! A confirmation email is on its way to you.'; }
       } else { throw new Error('send failed'); }
     }).catch(function () {
       m.style.color = '#d98a80';

@@ -88,6 +88,19 @@
     border-radius: 999px; padding: 5px 12px;
   }
   .perk.star { background: rgba(201,162,94,.14); border-color: var(--goldline); color: var(--gold-bright); }
+  .rate { display: flex; align-items: center; gap: 2px; margin-bottom: 16px; flex-wrap: wrap; }
+  .rate .star {
+    cursor: pointer; font-size: 24px; color: #4a5470; background: none; border: none;
+    padding: 0 2px; line-height: 1; transition: color .12s, transform .12s;
+  }
+  .rate .star:hover { transform: scale(1.15); }
+  .rate .star.lit { color: var(--gold-bright); }
+  .rate.voted .star { cursor: default; }
+  .rate.voted .star:hover { transform: none; }
+  .rate .avg {
+    font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12.5px;
+    color: var(--muted); margin-left: 10px;
+  }
   .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
   .btn {
     display: inline-block; font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -122,7 +135,7 @@
     <h1>Our October House Shortlist</h1>
     <div class="rule"></div>
     <p class="sub">group of 12 · quoted dates shown on each house — most are Oct 8–18</p>
-    <div class="howto">For Jane: tap <b>♥ I like this one</b> to float a house to the top of the list, or <b style="color:var(--muted)">✕ Remove</b> to drop the ones that don't make the cut. Then tell Chris what survived!</div>
+    <div class="howto">For Jane: tap <b>♥ I like this one</b> to float a house to the top of the list, rate any house <b style="color:var(--gold-bright)">1–5 stars</b> (everyone's votes combine into the average shown), or <b style="color:var(--muted)">✕ Remove</b> to drop the ones that don't make the cut. Then tell Chris what survived!</div>
     <div class="specs">
       <span class="spec">Heated pool</span>
       <span class="spec">Sleeps 12+</span>
@@ -141,7 +154,7 @@
     <div class="card" data-name="The Sunkiss">
       <div class="badge">Top Pick</div><div class="jane-pick">♥ Jane's pick</div>
       <h2><a href="https://hometeamvr.guestybookings.com/en/properties/66747fe41358a700137cf816?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">The Sunkiss</a></h2>
-      <div class="host">Home Team Luxury Rentals · 5 BR (4 kings + bunk room) · sleeps 16 · ★ 4.9 (58 reviews)</div>
+      <div class="host">Home Team Luxury Rentals · 5 BR (4 kings + bunk room) · sleeps 16 · ★ 4.9 (58 reviews) · added by Claude</div>
       <div><span class="dates">📅 Oct 8–18 · 10 nights</span></div>
       <div class="price-row"><span class="price">$8,720</span><span class="price-note">total with fees &amp; taxes · ~$9,720 with pool heat (+$100/night)</span></div>
       <p class="desc">The whole wish list in one backyard — and still under budget with the pool heated for the entire stay.</p>
@@ -150,6 +163,7 @@
         <span class="perk">Heated pool + hot tub</span><span class="perk">Pool table &amp; foosball</span>
         <span class="perk">Cornhole &amp; ladder golf</span><span class="perk">Fire pit &amp; BBQ</span><span class="perk">Chef's kitchen</span>
       </div>
+      <div class="rate" data-slug="sunkiss"></div>
       <div class="actions">
         <button class="btn like" onclick="toggleLike(this)">♥ I like this one</button>
         <a class="btn" href="https://hometeamvr.guestybookings.com/en/properties/66747fe41358a700137cf816?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">VIEW LISTING →</a>
@@ -160,7 +174,7 @@
     <div class="card" data-name="RnR">
       <div class="badge">Best Value</div><div class="jane-pick">♥ Jane's pick</div>
       <h2><a href="https://www.staywithstylescottsdale.com/vacation-rental/rnr/" target="_blank">RnR</a></h2>
-      <div class="host">Stay With Style Scottsdale · 7 BR (6 kings!) · sleeps 16 · 6,000 sq ft near Kierland Commons</div>
+      <div class="host">Stay With Style Scottsdale · 7 BR (6 kings!) · sleeps 16 · 6,000 sq ft near Kierland Commons · added by Claude</div>
       <div><span class="dates">📅 Oct 8–18 · 10 nights</span></div>
       <div class="price-row"><span class="price">~$8,000–8,500</span><span class="price-note">estimated all-in from $650/night · heated pool included FREE Oct–Apr</span></div>
       <p class="desc">The most house for the money — six king bedrooms, and the pool heating costs nothing extra in October.</p>
@@ -169,6 +183,7 @@
         <span class="perk">Built-in BBQ + Blackstone</span><span class="perk">Fire table &amp; cornhole</span>
         <span class="perk">Wet bar</span><span class="perk">Vaulted open living room</span>
       </div>
+      <div class="rate" data-slug="rnr"></div>
       <div class="actions">
         <button class="btn like" onclick="toggleLike(this)">♥ I like this one</button>
         <a class="btn" href="https://www.staywithstylescottsdale.com/vacation-rental/rnr/" target="_blank">VIEW LISTING →</a>
@@ -179,7 +194,7 @@
     <div class="card" data-name="Private Pickleball Court, Movie Room & Hot Tub">
       <div class="badge neutral">Under Budget</div><div class="jane-pick">♥ Jane's pick</div>
       <h2><a href="https://hometeamvr.guestybookings.com/en/properties?city=Scottsdale&amp;country=United+States&amp;minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">Private Pickleball Court, Movie Room &amp; Hot Tub</a></h2>
-      <div class="host">Home Team Luxury Rentals · 5 BR · sleeps 12 · ★ 4.9 (89 reviews)</div>
+      <div class="host">Home Team Luxury Rentals · 5 BR · sleeps 12 · ★ 4.9 (89 reviews) · added by Claude</div>
       <div><span class="dates">📅 Oct 8–18 · 10 nights</span></div>
       <div class="price-row"><span class="price">$8,865</span><span class="price-note">total with fees · ~$9,865 with pool heat</span></div>
       <p class="desc">Its own private pickleball court plus a movie room for the nights everyone's worn out from the sun.</p>
@@ -187,6 +202,7 @@
         <span class="perk star">Private pickleball court</span><span class="perk star">Movie room</span>
         <span class="perk">Pool + hot tub</span><span class="perk">Sleeps exactly 12</span>
       </div>
+      <div class="rate" data-slug="pickleball-movie"></div>
       <div class="actions">
         <button class="btn like" onclick="toggleLike(this)">♥ I like this one</button>
         <a class="btn" href="https://hometeamvr.guestybookings.com/en/properties?city=Scottsdale&amp;country=United+States&amp;minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">VIEW LISTING →</a>
@@ -197,7 +213,7 @@
     <div class="card" data-name="Scottsdale Magic">
       <div class="badge neutral">Splurge — ~$900 Over</div><div class="jane-pick">♥ Jane's pick</div>
       <h2><a href="https://hometeamvr.guestybookings.com/en/properties/66b139f04de7110011a202af?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">Scottsdale Magic</a></h2>
-      <div class="host">Home Team Luxury Rentals · 5 BR / 4 BA · sleeps 16 · ★ 4.8 (46 reviews)</div>
+      <div class="host">Home Team Luxury Rentals · 5 BR / 4 BA · sleeps 16 · ★ 4.8 (46 reviews) · added by Claude</div>
       <div><span class="dates">📅 Oct 8–18 · 10 nights</span></div>
       <div class="price-row"><span class="price">~$10,937</span><span class="price-note">$9,687 with fees + pool heat at $125/night</span></div>
       <p class="desc">The most loaded backyard of the bunch, if we're willing to stretch a little past ten.</p>
@@ -206,6 +222,7 @@
         <span class="perk">In-ground spa</span><span class="perk">Outdoor bar</span>
         <span class="perk">Pool table &amp; ping pong</span><span class="perk">Giant Jenga</span>
       </div>
+      <div class="rate" data-slug="magic"></div>
       <div class="actions">
         <button class="btn like" onclick="toggleLike(this)">♥ I like this one</button>
         <a class="btn" href="https://hometeamvr.guestybookings.com/en/properties/66b139f04de7110011a202af?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">VIEW LISTING →</a>
@@ -216,7 +233,7 @@
     <div class="card" data-name="Backyard Arcade">
       <div class="badge neutral">Splurge — ~$3K Over</div><div class="jane-pick">♥ Jane's pick</div>
       <h2><a href="https://hometeamvr.guestybookings.com/en/properties/667340fa2513ad0013299121?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">Backyard Arcade</a></h2>
-      <div class="host">Home Team Luxury Rentals · 6 BR / 3 BA · sleeps 16 · ★ 4.95 (58 reviews)</div>
+      <div class="host">Home Team Luxury Rentals · 6 BR / 3 BA · sleeps 16 · ★ 4.95 (58 reviews) · added by Chris</div>
       <div><span class="dates">📅 Oct 8–18 · 10 nights</span></div>
       <div class="price-row"><span class="price">~$13,039</span><span class="price-note">$11,789 with fees + pool heat at $125/night</span></div>
       <p class="desc">Chris's find — the backyard that doesn't run out of ways to play, if the budget can stretch.</p>
@@ -225,6 +242,7 @@
         <span class="perk">Massive fire pit lounge</span><span class="perk">Cornhole &amp; foosball</span>
         <span class="perk">Chef's kitchen, dining for 10</span><span class="perk">6 bedrooms</span>
       </div>
+      <div class="rate" data-slug="backyard-arcade"></div>
       <div class="actions">
         <button class="btn like" onclick="toggleLike(this)">♥ I like this one</button>
         <a class="btn" href="https://hometeamvr.guestybookings.com/en/properties/667340fa2513ad0013299121?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">VIEW LISTING →</a>
@@ -235,7 +253,7 @@
     <div class="card" data-name="Epic Family Getaway">
       <div class="badge neutral">Splurge — ~$1.8K Over</div><div class="jane-pick">♥ Jane's pick</div>
       <h2><a href="https://hometeamvr.guestybookings.com/en/properties/676cd3f43dac9800123fbb83?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">Epic Family Getaway</a></h2>
-      <div class="host">Home Team Luxury Rentals · 6 BR / 3 BA · sleeps 23 · ★ 4.85 (55 reviews)</div>
+      <div class="host">Home Team Luxury Rentals · 6 BR / 3 BA · sleeps 23 · ★ 4.85 (55 reviews) · added by Chris</div>
       <div><span class="dates">📅 Oct 8–18 · 10 nights</span></div>
       <div class="price-row"><span class="price">~$11,765</span><span class="price-note">$10,765 with fees + pool heat at $100/night</span></div>
       <p class="desc">Chris's find — the biggest house of the bunch, built for a crowd with kids in tow.</p>
@@ -244,6 +262,7 @@
         <span class="perk">Fenced heated pool + hot tub</span><span class="perk">Kids' bunk room: slide, arcade, foam pit, climbing wall</span>
         <span class="perk">Shuffleboard, horseshoes, cornhole, ping pong</span><span class="perk">Pool table + PS5 + popcorn machine</span>
       </div>
+      <div class="rate" data-slug="epic-family"></div>
       <div class="actions">
         <button class="btn like" onclick="toggleLike(this)">♥ I like this one</button>
         <a class="btn" href="https://hometeamvr.guestybookings.com/en/properties/676cd3f43dac9800123fbb83?minOccupancy=12&amp;checkIn=2026-10-08&amp;checkOut=2026-10-18&amp;adults=12" target="_blank">VIEW LISTING →</a>
@@ -254,7 +273,7 @@
     <div class="card" data-name="Stylish Arizona Abode">
       <div class="badge neutral">New — Oct 22–31 Dates</div><div class="jane-pick">♥ Jane's pick</div>
       <h2><a href="https://www.vrbo.com/2668972?chkin=2026-10-22&amp;chkout=2026-10-31&amp;startDate=2026-10-22&amp;endDate=2026-10-31&amp;adults=10" target="_blank">Stylish Arizona Abode</a></h2>
-      <div class="host">VacayAZ via Vrbo · 5 BR / 3.5 BA · sleeps 12 · North Scottsdale, mountain views · ★ 10/10 (33 reviews)</div>
+      <div class="host">VacayAZ via Vrbo · 5 BR / 3.5 BA · sleeps 12 · North Scottsdale, mountain views · ★ 10/10 (33 reviews) · added by Chris</div>
       <div><span class="dates">📅 Oct 22–31 · 9 nights</span></div>
       <div class="price-row"><span class="price">$8,163</span><span class="price-note">9 nights (Oct 22–31), all fees included · ~$9,738 with pool heat ($175/night)</span></div>
       <p class="desc">Chris's find — a $2M+ desert home with a waterfall grotto pool and rooftop deck, still under $10K heated.</p>
@@ -263,6 +282,7 @@
         <span class="perk">Grand spa + misters</span><span class="perk">Outdoor fireplace + fire pit</span>
         <span class="perk">Cornhole &amp; bocce</span><span class="perk">Pool table &amp; pickleball (per reviews)</span><span class="perk">17 mi to Old Town</span>
       </div>
+      <div class="rate" data-slug="az-abode"></div>
       <div class="actions">
         <button class="btn like" onclick="toggleLike(this)">♥ I like this one</button>
         <a class="btn" href="https://www.vrbo.com/2668972?chkin=2026-10-22&amp;chkout=2026-10-31&amp;startDate=2026-10-22&amp;endDate=2026-10-31&amp;adults=10" target="_blank">VIEW LISTING →</a>
@@ -273,7 +293,7 @@
     <div class="card" data-name="Luxe">
       <div class="badge neutral">Price Pending</div><div class="jane-pick">♥ Jane's pick</div>
       <h2><a href="https://www.staywithstylescottsdale.com/vacation-rental/luxe/?check_in=10/01/2026&amp;check_out=10/10/2026" target="_blank">Luxe</a></h2>
-      <div class="host">Stay With Style Scottsdale · 7 BR / 4.5 BA · sleeps 16 · between Kierland &amp; Old Town</div>
+      <div class="host">Stay With Style Scottsdale · 7 BR / 4.5 BA · sleeps 16 · between Kierland &amp; Old Town · added by Chris</div>
       <div><span class="dates">📅 Oct 1–10 · 9 nights</span></div>
       <div class="price-row"><span class="price">Quote needed</span><span class="price-note">rate unlisted · pool heat is $200/day here (~$1,800 for 9 nights)</span></div>
       <p class="desc">Chris's find — the only house on the list with a real putting green, plus a brand-new sport court.</p>
@@ -282,6 +302,7 @@
         <span class="perk">Heated pool (fee) + hot tub</span><span class="perk">Shuffleboard &amp; ping pong</span>
         <span class="perk">Game room: pool table + foosball</span><span class="perk">Custom bar</span><span class="perk">Fire pit</span>
       </div>
+      <div class="rate" data-slug="luxe"></div>
       <div class="actions">
         <button class="btn like" onclick="toggleLike(this)">♥ I like this one</button>
         <a class="btn" href="https://www.staywithstylescottsdale.com/vacation-rental/luxe/?check_in=10/01/2026&amp;check_out=10/10/2026" target="_blank">VIEW LISTING →</a>
@@ -342,6 +363,68 @@
     document.getElementById('removedList').appendChild(card);
     refreshLabels();
   }
+
+  // ---- Star voting (shared counters via abacus.jasoncameron.dev) ----
+  var RATE_NS = 'kirk-vacation-ideas-2026';
+  var RATE_API = 'https://abacus.jasoncameron.dev';
+  function getCounts(slug) {
+    return Promise.all([1,2,3,4,5].map(function (n) {
+      return fetch(RATE_API + '/get/' + RATE_NS + '/' + slug + '_s' + n)
+        .then(function (r) { return r.ok ? r.json() : { value: 0 }; })
+        .then(function (j) { return j.value || 0; })
+        .catch(function () { return 0; });
+    }));
+  }
+  function updateAvg(el, slug) {
+    getCounts(slug).then(function (c) {
+      var votes = c[0] + c[1] + c[2] + c[3] + c[4];
+      var sum = c[0] * 1 + c[1] * 2 + c[2] * 3 + c[3] * 4 + c[4] * 5;
+      var avgEl = el.querySelector('.avg');
+      if (!votes) { avgEl.textContent = 'No ratings yet — be the first!'; return; }
+      var avg = (sum / votes).toFixed(1);
+      avgEl.textContent = '\u2605 ' + avg + ' average \u00b7 ' + votes + ' vote' + (votes > 1 ? 's' : '');
+      var lit = Math.round(sum / votes);
+      el.querySelectorAll('.star').forEach(function (st, idx) {
+        st.classList.toggle('lit', idx < lit);
+      });
+    });
+  }
+  function castVote(el, slug, n) {
+    var votedKey = 'kirkvote_' + slug;
+    try { if (localStorage.getItem(votedKey)) {
+      el.querySelector('.avg').textContent = 'You already rated this one!';
+      setTimeout(function () { updateAvg(el, slug); }, 1600);
+      return;
+    } } catch (e) {}
+    el.classList.add('voted');
+    el.querySelector('.avg').textContent = 'Saving your ' + n + '-star vote\u2026';
+    fetch(RATE_API + '/hit/' + RATE_NS + '/' + slug + '_s' + n)
+      .then(function () {
+        try { localStorage.setItem(votedKey, String(n)); } catch (e) {}
+        updateAvg(el, slug);
+      })
+      .catch(function () {
+        el.classList.remove('voted');
+        el.querySelector('.avg').textContent = 'Vote didn\u2019t save — try again?';
+      });
+  }
+  document.querySelectorAll('.rate').forEach(function (el) {
+    var slug = el.getAttribute('data-slug');
+    for (var n = 1; n <= 5; n++) {
+      (function (n) {
+        var b = document.createElement('button');
+        b.className = 'star'; b.textContent = '\u2605';
+        b.setAttribute('aria-label', n + ' stars');
+        b.onclick = function () { castVote(el, slug, n); };
+        el.appendChild(b);
+      })(n);
+    }
+    var avg = document.createElement('span');
+    avg.className = 'avg'; avg.textContent = 'Loading ratings\u2026';
+    el.appendChild(avg);
+    try { if (localStorage.getItem('kirkvote_' + slug)) el.classList.add('voted'); } catch (e) {}
+    updateAvg(el, slug);
+  });
 </script>
 </body>
 </html>
