@@ -118,7 +118,7 @@
     }
     m.style.display = 'block'; m.style.color = '#9aa3b8';
     m.textContent = 'Sending…';
-    fetch('https://formsubmit.co/ajax/chrisleekirk@gmail.com', {
+    fetch('https://formsubmit.co/ajax/7ad3ac8894db1be4cfc761738b77e60d', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
@@ -137,7 +137,7 @@
       } else { throw new Error('send failed'); }
     }).catch(function () {
       m.style.color = '#d98a80';
-      m.innerHTML = 'Hmm, that didn\'t go through. Backup: <a style="color:#d4af6a" href="mailto:chrisleekirk@gmail.com?subject=Vacation%20Idea&body=' + encodeURIComponent('Link: ' + link + (note ? '\nNote: ' + note : '')) + '">email it to Chris instead</a> or just text him the link!';
+      m.textContent = 'Hmm, that didn\'t go through — just text or email the link to Chris instead!';
     });
   }
 </script>
